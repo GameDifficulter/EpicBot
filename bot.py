@@ -9,9 +9,8 @@ from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
 
-intents = discord.Intents.default()
+intents = discord.Intents.all()
 intents.members = True
 intents.messages = True
 
@@ -42,11 +41,17 @@ async def on_ready():
 
 @bot.event
 async def on_connect():
+    # await bot.load_extension("tictactoe")
+    await bot.load_extension("normal_commands")
+    await bot.load_extension("silly_commands")
+    await bot.load_extension("voice_commands")
+    await bot.load_extension("owner")
+
     print(f'{bot.user.name} is connected to Discord.')\
 
 @bot.event
 async def on_disconnect():
-    print('{bot.user.name} has disconnected. Attempting to reconnect...')
+    print(f'{bot.user.name} has disconnected. Attempting to reconnect...')
 
 
 @bot.event
@@ -289,7 +294,7 @@ async def on_reaction_add(reaction, member):
 @bot.command()
 async def reload(ctx, module):
     if ctx.author.id == 335579816382300179:
-        bot.reload_extension(module)
+        await bot.reload_extension(module)
 
         await ctx.message.add_reaction('✅')
     else:
@@ -303,11 +308,4 @@ async def reload(ctx, module):
 #     await user.ban()
 #     await ctx.send("boom.")
 
-bot.load_extension("tictactoe")
-
-bot.load_extension("normal_commands")
-bot.load_extension("silly_commands")
-bot.load_extension("voice_commands")
-
-bot.load_extension("owner")
 bot.run(TOKEN)

@@ -5,7 +5,7 @@ class NormalCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name = 'help', cls = None, description = 'Sends a help message.')
+    @commands.command(name = 'help', description = 'Sends a help message.')
     async def help(self,ctx):
         cop = [cmd for cmd in self.bot.commands]
         names = [cmd.name for cmd in cop]
@@ -34,5 +34,5 @@ class NormalCommands(commands.Cog):
 
         await ctx.send(embed = com)
 
-def setup(bot):
-    bot.add_cog(NormalCommands(bot))
+async def setup(bot):
+    await bot.add_cog(NormalCommands(bot))

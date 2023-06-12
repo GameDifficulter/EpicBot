@@ -26,7 +26,7 @@ class SillyCommands(commands.Cog):
             await message.add_reaction('🦆')
 
 
-    @commands.command(name = "8ball", cls = None, description = "Epic Bot will provide a yes or no answer to your deepest questions. Use the format \"epic 8ball [question]\"")
+    @commands.command(name = "8ball", description = "Epic Bot will provide a yes or no answer to your deepest questions. Use the format \"epic 8ball [question]\"")
     async def eight_ball(self, ctx, *, question):
 
         decision = random.randint(1,25)
@@ -75,7 +75,7 @@ class SillyCommands(commands.Cog):
 
         await ctx.send(embed = answer)
 
-    @commands.command(name = "hello", cls = None, description = "Epic Bot says hello! Add a number to increase the number of times he says it (caps at 100).")
+    @commands.command(name = "hello", description = "Epic Bot says hello! Add a number to increase the number of times he says it (caps at 100).")
     async def hello(self, ctx, times = 1):
         if times > 100:
             times = 100
@@ -85,7 +85,7 @@ class SillyCommands(commands.Cog):
         else:
             await ctx.send('hello '*times)
 
-    @commands.command(name = "howepic", cls = None, description = "Measures the epicness of the user who invoked this command. To find the epicness of anything else, use \"epic howepic [thing].\"")
+    @commands.command(name = "howepic", description = "Measures the epicness of the user who invoked this command. To find the epicness of anything else, use \"epic howepic [thing].\"")
     async def howepic(self, ctx, *, thing = None):
         content = ''
         if thing == None:
@@ -134,23 +134,23 @@ class SillyCommands(commands.Cog):
 
         await ctx.send(embed = embed)
 
-    @commands.command(name = "pissandshit", cls = None, description = "Sends the message \"OH FUCK I'M PISSING AND SHITTING EVERYWHERE\" a random number of times (up to 20).")
+    @commands.command(name = "pissandshit", description = "Sends the message \"OH FUCK I'M PISSING AND SHITTING EVERYWHERE\" a random number of times (up to 20).")
     async def pissandshit(self, ctx):
         for i in range(random.randint(1,20)):
             await ctx.send("OH FUCK I'M PISSING AND SHITTING EVERYWHERE")
 
-        dm = await ctx.member.createdm()
+        dm = await ctx.author.create_dm()
 
         await dm.send("Well you've made a mess.")
 
-    @commands.command(name = "say", cls = None, description = "Epic Bot will say exactly what you type. Use the format \"epic say [thing]\"")
+    @commands.command(name = "say", description = "Epic Bot will say exactly what you type. Use the format \"epic say [thing]\"")
     async def say(self, ctx, *, stuff):
         await ctx.send(stuff)
 
 
-    @commands.command(name = "test", cls = None, description = "Test")
+    @commands.command(name = "test", description = "Test")
     async def test(self, ctx):
         await ctx.send("haha yes I am alive")
 
-def setup(bot):
-    bot.add_cog(SillyCommands(bot))
+async def setup(bot):
+    await bot.add_cog(SillyCommands(bot))

@@ -9,7 +9,7 @@ class TicTacToe(commands.Cog):
         self.bot = bot
         self.games = []
 
-    @commands.command(name = 'tictactoe', cls = None, description = "Epic Bot will learn to play Tic Tac Toe with you.")
+    @commands.command(name = 'tictactoe', description = "Epic Bot will learn to play Tic Tac Toe with you.")
     async def tictactoe(self,ctx,opponent = None):
         # if ctx.author.id != 335579816382300179:
         #     return
@@ -461,5 +461,5 @@ class Game(commands.Cog):
                 await self.end_game.start()
 
 
-def setup(bot):
-    bot.add_cog(TicTacToe(bot))
+async def setup(bot):
+    await bot.add_cog(TicTacToe(bot))

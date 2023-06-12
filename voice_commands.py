@@ -6,7 +6,7 @@ class VoiceCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name = 'join', cls = None, description = "Joins the voice channel of the person who invoked the command.")
+    @commands.command(name = 'join', description = "Joins the voice channel of the person who invoked the command.")
     async def join(self, ctx):
         user_voice = ctx.author.voice.channel
         await user_voice.connect(timeout = 1.0, reconnect = True)
@@ -17,19 +17,19 @@ class VoiceCommands(commands.Cog):
 
         await ctx.send("Joining " + user_voice.name)
 
-    @commands.command(name = 'fuckoff', cls = None, description = 'Leaves the voice channel.')
+    @commands.command(name = 'fuckoff', description = 'Leaves the voice channel.')
     async def fuckoff(self, ctx):
         for v in self.bot.voice_clients:
             if v.guild == ctx.guild:
                 await ctx.send("Fucking off from " + ctx.author.voice.channel.name)
                 await v.disconnect(force = True)
 
-    @commands.command(name = 'bruh', cls = None, description = 'He says bruh.')
+    @commands.command(name = 'bruh', description = 'He says bruh.')
     async def bruh(self, ctx):
         bruhh = open('bruh.wav','rb',buffering=0)
         for v in self.bot.voice_clients:
             if v.guild == ctx.guild:
                 v.play(discord.PCMAudio(bruhh))
 
-def setup(bot):
-    bot.add_cog(VoiceCommands(bot))
+async def setup(bot):
+    await bot.add_cog(VoiceCommands(bot))

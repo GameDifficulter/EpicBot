@@ -1,0 +1,6 @@
+.env
+__pycache__/voice_commands.cpython-311.pyc
+__pycache__/tictactoe.cpython-311.pyc
+__pycache__/silly_commands.cpython-311.pyc
+__pycache__/owner.cpython-311.pyc
+__pycache__/normal_commands.cpython-311.pyc
