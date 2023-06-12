@@ -294,9 +294,12 @@ async def on_reaction_add(reaction, member):
 @bot.command()
 async def reload(ctx, module):
     if ctx.author.id == 335579816382300179:
-        await bot.reload_extension(module)
-
-        await ctx.message.add_reaction('✅')
+        try:
+            await bot.reload_extension(module)
+            await ctx.message.add_reaction('✅')
+        except:
+            await ctx.message.add_reaction('❎')
+            
     else:
         await ctx.message.add_reaction('❎')
 
