@@ -326,6 +326,7 @@ class Game(commands.Cog):
 
                 self.cur_moves.append(choice)
 
+                # TODO: fix the empty value in choice
                 self.board[temp_case.board.index(choice)] = '⭕'
 
 
@@ -342,7 +343,7 @@ class Game(commands.Cog):
                         cases['water'][" ".join(case.board)] = {'unused': case.unused}
 
                     with open('cases.json','w') as case_file:
-                        json.dump(cases,case_file,ensure_ascii=False)
+                        json.dump(cases,case_file,ensure_ascii=True)
 
                     self.turn = f"{self.cur_player.name} wins!"
                     self.complete = True
@@ -359,7 +360,7 @@ class Game(commands.Cog):
                         cases['water'][" ".join(case.board)] = {'unused': case.unused}
 
                     with open('cases.json','w') as case_file:
-                        json.dump(cases,case_file,ensure_ascii=False)
+                        json.dump(cases,case_file,ensure_ascii=True)
 
                     self.complete = True
                     self.turn = "It's a draw!"
@@ -424,7 +425,7 @@ class Game(commands.Cog):
                                 cases['water'][" ".join(case.board)] = {'unused': case.unused}
 
                             with open('cases.json','w') as case_file:
-                                json.dump(cases,case_file,ensure_ascii=False)
+                                json.dump(cases,case_file,ensure_ascii=True)
                 
                         self.turn = f"{self.cur_player.name} wins!"
                         self.complete = True

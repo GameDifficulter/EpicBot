@@ -147,7 +147,6 @@ class SillyCommands(commands.Cog):
     async def say(self, ctx, *, stuff):
         await ctx.send(stuff)
 
-
     @commands.command(name = "test", description = "Test")
     async def test(self, ctx):
         await ctx.send("haha yes I am alive")

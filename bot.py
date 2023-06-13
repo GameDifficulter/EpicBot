@@ -41,7 +41,7 @@ async def on_ready():
 
 @bot.event
 async def on_connect():
-    # await bot.load_extension("tictactoe")
+    await bot.load_extension("tictactoe")
     await bot.load_extension("normal_commands")
     await bot.load_extension("silly_commands")
     await bot.load_extension("voice_commands")
