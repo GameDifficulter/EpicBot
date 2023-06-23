@@ -40,9 +40,10 @@ class VoiceCommands(commands.Cog):
         audio = el.generate(stuff, KEY, myself, "eleven_monolingual_v1", True, 2048)
         el.save(audio, 'speak.wav')
 
+        player = open('speak.wav', 'rb', buffering = 0)
         for v in self.bot.voice_clients:
             if v.guild == ctx.guild:
-                v.play(discord.PCMAudio(audio))
+                v.play(discord.PCMAudio(player))
 
         
 
