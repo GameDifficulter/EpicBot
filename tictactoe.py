@@ -415,10 +415,11 @@ class Game(commands.Cog):
                             f = open("cases.json", "r")
                             c = f.read()
                             cases = json.loads(c)
-
-                            case.unused[self.cur_moves[i]] -= 50
-                            if case.unused[self.cur_moves[i]] < 0:
-                                case.unused[self.cur_moves[i]] = 0
+                            
+                            for j, case in enumerate(self.cur_cases):
+                                case.unused[self.cur_moves[j]] -= 50
+                                if case.unused[self.cur_moves[j]] < 0:
+                                    case.unused[self.cur_moves[j]] = 0
                                     
                             cases['water'][" ".join(case.board)] = {'unused': case.unused}
 
