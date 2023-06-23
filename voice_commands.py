@@ -1,6 +1,13 @@
 import discord
+import elevenlabs as el
+import os
+from dotenv import load_dotenv
 
 from discord.ext import commands
+
+load_dotenv()
+KEY = os.get_env('ELEVENLABS_KEY')
+el.set_api_key(KEY)
 
 class VoiceCommands(commands.Cog):
     def __init__(self, bot):
@@ -24,12 +31,19 @@ class VoiceCommands(commands.Cog):
                 await ctx.send("Fucking off from " + ctx.author.voice.channel.name)
                 await v.disconnect(force = True)
 
-    @commands.command(name = 'bruh', description = 'He says bruh.')
-    async def bruh(self, ctx):
-        bruhh = open('bruh.wav','rb',buffering=0)
+    @commands.command(name = 'speak', description = 'He says what you want in the voice chat.')
+    async def speak(self, ctx, *, stuff):
+        voices = el.Voices.from_api()
+        myself = voices[10]
+
+        text = stuff
+        audio = el.generate(stuff, KEY, myself, "eleven_monolingual_v1", True, 2048)
+
         for v in self.bot.voice_clients:
             if v.guild == ctx.guild:
-                v.play(discord.PCMAudio(bruhh))
+                v.play(discord.PCMAudio(audio))
+
+        
 
 async def setup(bot):
     await bot.add_cog(VoiceCommands(bot))
