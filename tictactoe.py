@@ -308,7 +308,17 @@ class Game(commands.Cog):
                                 temp_case.board = temp_case.flip_board(temp_case.board,False)
                         for iter in range(3):
                             temp_case.board = temp_case.rotate_board(temp_case.board, 1,False)
-                    
+
+                has_non_zero = False
+                for key in temp_case.unused:
+                    if temp_case.unused[key] != 0:
+                        has_non_zero = True
+                        break
+
+                if not (has_non_zero):
+                    for key in temp_case.unused:
+                        temp_case.unused[key] = 100
+                
                 limit = 0
                 for key in temp_case.unused:
                     limit += temp_case.unused[key]
@@ -406,23 +416,11 @@ class Game(commands.Cog):
                             c = f.read()
                             cases = json.loads(c)
 
-                            has_non_zero = False
-                            
-                            for i,case in enumerate(self.cur_cases):
-                                for key in case.unused:
-                                    if case.unused[key] != 0:
-                                        has_non_zero = True
-                                        break
-
-                                if has_non_zero:
-                                    case.unused[self.cur_moves[i]] -= 50
-                                    if case.unused[self.cur_moves[i]] < 0:
-                                        case.unused[self.cur_moves[i]] = 0
-                                else:
-                                    for key in case.unused:
-                                        case.unused[key] = 100
+                            case.unused[self.cur_moves[i]] -= 50
+                            if case.unused[self.cur_moves[i]] < 0:
+                                case.unused[self.cur_moves[i]] = 0
                                     
-                                cases['water'][" ".join(case.board)] = {'unused': case.unused}
+                            cases['water'][" ".join(case.board)] = {'unused': case.unused}
 
                             with open('cases.json','w') as case_file:
                                 json.dump(cases,case_file,ensure_ascii=True)

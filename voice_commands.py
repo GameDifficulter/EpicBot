@@ -37,7 +37,7 @@ class VoiceCommands(commands.Cog):
         myself = voices[10]
 
         text = stuff
-        audio = el.generate(stuff, KEY, myself, "eleven_monolingual_v1", True, 2048)
+        audio = el.generate(stuff, KEY, myself, "eleven_monolingual_v1", False, 2048)
         el.save(audio, 'speak.wav')
 
         player = open('speak.wav', 'rb', buffering = 0)
