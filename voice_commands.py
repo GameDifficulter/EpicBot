@@ -38,6 +38,7 @@ class VoiceCommands(commands.Cog):
 
         text = stuff
         audio = el.generate(stuff, KEY, myself, "eleven_monolingual_v1", True, 2048)
+        el.save(audio, 'speak.wav')
 
         for v in self.bot.voice_clients:
             if v.guild == ctx.guild:
