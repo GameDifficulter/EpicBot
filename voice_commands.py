@@ -1,5 +1,4 @@
 import discord
-import PyNaCl
 
 from discord.ext import commands
 
