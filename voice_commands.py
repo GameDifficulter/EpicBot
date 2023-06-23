@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 
 load_dotenv()
-KEY = os.get_env('ELEVENLABS_KEY')
+KEY = os.getenv('ELEVENLABS_KEY')
 el.set_api_key(KEY)
 
 class VoiceCommands(commands.Cog):
